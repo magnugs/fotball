@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2-4-2 Formasjonsveiledning</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-dark: #1a3a1a;
+    --green-mid: #2d5a1b;
+    --green-light: #3d7a25;
+    --green-stripe: #264d18;
+    --white: #f5f5f0;
+    --yellow: #f0c040;
+    --red: #c0392b;
+    --blue: #2980b9;
+    --panel-bg: #0f1f0f;
+    --text-light: #d4e8c2;
+  }
+
+  body {
+    background: var(--panel-bg);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  header {
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+    border-bottom: 2px solid #2a4a1a;
+  }
+
+  header h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    letter-spacing: 0.08em;
+    color: var(--yellow);
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  header p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-top: 0.4rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 0;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+    align-items: start;
+  }
+
+  /* ── PITCH ── */
+  .pitch-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .pitch-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--text-light);
+    opacity: 0.6;
+    text-transform: uppercase;
+  }
+
+  .pitch {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    /* 9-a-side: 45m wide x 64m long → aspect ratio 45/64 ≈ 0.703 */
+    aspect-ratio: 45 / 64;
+    background: var(--green-mid);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  /* alternating grass stripes */
+  .pitch::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      180deg,
+      transparent 0px,
+      transparent 30px,
+      rgba(0,0,0,0.10) 30px,
+      rgba(0,0,0,0.10) 60px
+    );
+  }
+
+  /* pitch markings */
+  .pitch svg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+  }
+
+  /* end labels */
+  .pitch-end {
+    position: absolute;
+    left: 50%; transform: translateX(-50%);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.28);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .pitch-end.top { top: 5px; }
+  .pitch-end.bottom { bottom: 5px; }
+
+  /* player tokens */
+  .player {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.15s;
+  }
+  .player:hover { transform: translate(-50%, -50%) scale(1.12); }
+
+  .player-dot {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.1;
+    text-transform: uppercase;
+    border: 2.5px solid rgba(255,255,255,0.6);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    transition: box-shadow 0.15s, border-color 0.15s;
+    color: #fff;
+    letter-spacing: 0.02em;
+  }
+
+  .player.active .player-dot {
+    box-shadow: 0 0 0 3px var(--yellow), 0 2px 12px rgba(0,0,0,0.6);
+    border-color: var(--yellow);
+  }
+
+  .gk   .player-dot { background: #c0392b; }
+  .def  .player-dot { background: #1a5276; }
+  .mid  .player-dot { background: #145a32; border-color: rgba(255,255,255,0.7); }
+  .cdm-player .player-dot { background: #1a4a5a; border-color: rgba(100,200,255,0.7); }
+  .cam-player .player-dot { background: #5a3a10; border-color: rgba(255,200,80,0.8); }
+  .fwd  .player-dot { background: #784212; }
+
+  .player-dot span { display: block; font-size: 0.55rem; opacity: 0.85; }
+
+  /* ── PANEL ── */
+  .panel {
+    padding: 0 0 0 1.5rem;
+    position: sticky;
+    top: 1rem;
+  }
+
+  .panel h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid #2a4a1a;
+    padding-bottom: 0.4rem;
+  }
+
+  .role-card {
+    display: none;
+    background: #162616;
+    border-radius: 8px;
+    border-left: 4px solid var(--yellow);
+    padding: 1rem 1rem 1rem 1rem;
+    margin-bottom: 0.5rem;
+    animation: fadeIn 0.2s ease;
+  }
+  .role-card.visible { display: block; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  .role-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.2rem;
+  }
+
+  .role-card .position-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+  }
+  .badge-gk  { background: #c0392b33; color: #e74c3c; border: 1px solid #c0392b55; }
+  .badge-def { background: #1a527633; color: #5dade2; border: 1px solid #1a527655; }
+  .badge-mid { background: #145a3233; color: #58d68d; border: 1px solid #145a3255; }
+  .badge-cdm { background: #1a4a5a44; color: #7fd4f0; border: 1px solid #1a4a5a88; }
+  .badge-cam { background: #5a3a1044; color: #f0c870; border: 1px solid #5a3a1088; }
+  .badge-fwd { background: #78421233; color: #f0b27a; border: 1px solid #78421255; }
+
+  .role-card p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-light);
+    margin-bottom: 0.8rem;
+  }
+
+  .duties {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .duties li {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .duties li::before {
+    content: '▸';
+    color: var(--yellow);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .duties li strong { color: var(--yellow); font-weight: 600; }
+
+  .hint {
+    text-align: center;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.35);
+    margin-top: 0.5rem;
+    letter-spacing: 0.05em;
+    font-style: italic;
+  }
+
+  /* legend */
+  .legend {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.8rem;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 0.4rem;
+    font-size: 0.72rem; color: var(--text-light);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .legend-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.4);
+  }
+
+  /* default panel state */
+  .default-msg {
+    color: rgba(255,255,255,0.3);
+    font-size: 0.85rem;
+    font-style: italic;
+    text-align: center;
+    padding: 2rem 0;
+  }
+
+  @media (max-width: 680px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+    .panel {
+      padding: 1rem 0 0;
+      position: static;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>2-4-2 Formasjon</h1>
+  <p>Trykk på en spiller for å se rolle og ansvar</p>
+</header>
+
+<div class="layout">
+  <!-- PITCH -->
+  <div class="pitch-wrap">
+    <div class="pitch" id="pitch">
+      <div class="pitch-end top">Motstanderens mål</div>
+      <div class="pitch-end bottom">Vårt mål</div>
+
+      <!--
+        ViewBox = 45 × 64 (real metres, 9-a-side U12)
+        Målfelt: 23m bred × 8m dyp, sentrert → x=(45-23)/2=11, w=23, h=8
+        Mål: 5m bredt → x=20, w=5
+        Senterring: r=7m
+        Ingen straffepunkt, straffebue eller målområde inne i målfeltet
+      -->
+      <svg viewBox="0 0 45 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- Outer boundary -->
+        <rect x="0.5" y="0.5" width="44" height="63"
+              fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="0.4"/>
+
+        <!-- Halfway line -->
+        <line x1="0.5" y1="32" x2="44.5" y2="32"
+              stroke="rgba(255,255,255,0.45)" stroke-width="0.35"/>
+
+        <!-- Centre circle r=7m -->
+        <circle cx="22.5" cy="32" r="7"
+                fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="0.35"/>
+        <circle cx="22.5" cy="32" r="0.45" fill="rgba(255,255,255,0.6)"/>
+
+        <!-- ── TOP END (opponent goal) ── -->
+        <!-- Målfelt: 23m bredt × 8m dypt, x=11, y=0.5, w=23, h=8 -->
+        <rect x="11" y="0.5" width="23" height="8"
+              fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.5)" stroke-width="0.35"/>
+        <!-- Mål: 5m bredt -->
+        <rect x="20" y="-1.5" width="5" height="2"
+              fill="rgba(0,0,0,0.3)" stroke="rgba(255,255,255,0.6)" stroke-width="0.4"/>
+        <!-- Corner arcs top -->
+        <path d="M 0.5 2.5 A 2 2 0 0 0 2.5 0.5"
+              fill="none" stroke="rgba(255,255,255,0.38)" stroke-width="0.28"/>
+        <path d="M 44.5 2.5 A 2 2 0 0 1 42.5 0.5"
+              fill="none" stroke="rgba(255,255,255,0.38)" stroke-width="0.28"/>
+
+        <!-- ── BOTTOM END (our goal) ── -->
+        <!-- Målfelt: 23m bredt × 8m dypt, x=11, y=55.5, w=23, h=8 -->
+        <rect x="11" y="55.5" width="23" height="8"
+              fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.5)" stroke-width="0.35"/>
+        <!-- Mål: 5m bredt -->
+        <rect x="20" y="63.5" width="5" height="2"
+              fill="rgba(0,0,0,0.3)" stroke="rgba(255,255,255,0.6)" stroke-width="0.4"/>
+        <!-- Corner arcs bottom -->
+        <path d="M 0.5 61.5 A 2 2 0 0 1 2.5 63.5"
+              fill="none" stroke="rgba(255,255,255,0.38)" stroke-width="0.28"/>
+        <path d="M 44.5 61.5 A 2 2 0 0 0 42.5 63.5"
+              fill="none" stroke="rgba(255,255,255,0.38)" stroke-width="0.28"/>
+
+      </svg>
+
+      <!--
+        Oppdaterte spillerposisjoner (left=x/45, top=y/64):
+
+        VS (venstre spiss):  x=15m→33%,  y=9m→14%
+        HS (høyre spiss):    x=30m→67%,  y=11m→17%   ← litt lavere = staggered
+        VM (venstre mid):    x=2m→4%,    y=30m→47%   ← rett foran midtlinjen
+        HM (høyre mid):      x=43m→96%,  y=30m→47%   ← rett foran midtlinjen
+        CAM:                 x=28m→62%,  y=25m→38%   (uendret)
+        CDM:                 x=17m→38%,  y=34m→54%   (uendret)
+        VSB (v. stopper):    x=19m→42%,  y=44m→69%   ← tettere mot midten
+        HSB (h. stopper):    x=26m→58%,  y=44m→69%   ← tettere mot midten (~7m mellom)
+        MV (målvakt):        x=22.5m→50%, y=57m→89%
+      -->
+
+      <!-- FORWARDS — litt staggered i høyden -->
+      <div class="player fwd" style="left:33%; top:27%" data-role="lf" onclick="showRole('lf', this)">
+        <div class="player-dot">LCA</div>
+      </div>
+      <div class="player fwd" style="left:67%; top:17%" data-role="rf" onclick="showRole('rf', this)">
+        <div class="player-dot">RCA</div>
+      </div>
+
+      <!-- WIDE MIDFIELDERS — rett foran midtlinjen -->
+      <div class="player mid" style="left:4%; top:47%" data-role="lm" onclick="showRole('lm', this)">
+        <div class="player-dot">LWB</div>
+      </div>
+      <div class="player mid" style="left:96%; top:47%" data-role="rm" onclick="showRole('rm', this)">
+        <div class="player-dot">RWB</div>
+      </div>
+
+      <!-- CENTRAL MIDFIELDERS — staggered diagonalt, uendret -->
+      <div class="player mid cam-player" style="left:62%; top:38%" data-role="cam" onclick="showRole('cam', this)">
+        <div class="player-dot">CAM</div>
+      </div>
+      <div class="player mid cdm-player" style="left:38%; top:54%" data-role="cdm" onclick="showRole('cdm', this)">
+        <div class="player-dot">CDM</div>
+      </div>
+
+      <!-- DEFENDERS — tettere mot midten, ~7m mellom -->
+      <div class="player def" style="left:42%; top:69%" data-role="lcb" onclick="showRole('lcb', this)">
+        <div class="player-dot">CB</div>
+      </div>
+      <div class="player def" style="left:58%; top:69%" data-role="rcb" onclick="showRole('rcb', this)">
+        <div class="player-dot">CB</div>
+      </div>
+
+      <!-- GOALKEEPER -->
+      <div class="player gk" style="left:50%; top:89%" data-role="gk" onclick="showRole('gk', this)">
+        <div class="player-dot">K</div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#784212"></div>LCA / RCA</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#5a3a10; border-color:rgba(255,200,80,0.8)"></div>CAM</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#145a32"></div>LWB / RWB</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#1a4a5a; border-color:rgba(100,200,255,0.7)"></div>CDM</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#1a5276"></div>CB</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#c0392b"></div>K</div>
+    </div>
+    <p class="hint">Trykk på en spiller for å se rollen</p>
+  </div>
+
+  <!-- INFO PANEL -->
+  <div class="panel">
+    <h2>Spillerroller</h2>
+    <div class="default-msg" id="defaultMsg">← Trykk på en spiller på banen</div>
+
+    <!-- GK -->
+    <div class="role-card" id="role-gk">
+      <h3>Keeper</h3>
+      <span class="position-badge badge-gk">K · #1</span>
+      <p>Den siste forsvarsskansen og lagets første angriper. En god målvakt organiserer alle foran seg og starter angrep med smart pasningsspill.</p>
+      <ul class="duties">
+        <li>Redde skudd — plassering, fotarbeid og mot</li>
+        <li>Ta innlegg trygt — ropt "keeper!" høyt</li>
+        <li>Fordel raskt for å starte angrep — kast eller spark til den fri forsvareren</li>
+        <li>Organiser de to forsvarerne — konstant kommunikasjon</li>
+        <li>Ikke vær redd for å være offensiv og sweepe bak forsvaret når muligheten byr seg</li>
+      </ul>
+    </div>
+
+    <!-- LCB -->
+    <div class="role-card" id="role-lcb">
+      <h3>Venstre Stopper</h3>
+      <span class="position-badge badge-def">CB · #5</span>
+      <p>En av to forsvarspilarer. Jobber som par med høyre stopper for å beskytte målet og vinne ballen tilbake på en ryddig måte.</p>
+      <ul class="duties">
+        <li>Mark og vinn dueller mot motstanderens spisser</li>
+        <li>Hold en kompakt, smal posisjon — ikke gå for langt ut</li>
+        <li>Kommuniser konstant med stoppermakker</li>
+        <li>Når makker rykker frem, dekk du bakover</li>
+        <li>Start angrep — spill kort til midtbanen eller bytt side</li>
+        <li>Gå aldri begge mot ballen samtidig</li>
+      </ul>
+    </div>
+
+    <!-- RCB -->
+    <div class="role-card" id="role-rcb">
+      <h3>Høyre Stopper</h3>
+      <span class="position-badge badge-def">CB · #6</span>
+      <p>Speilbildet av venstre stopper. Sammen danner de et solid tomannsforsvar som må tenke som én enhet.</p>
+      <ul class="duties">
+        <li>Mark og utfordre motstanderens spisser — hold deg mellom spiss og mål</li>
+        <li>Dekk makker når han rykker frem for å presse</li>
+        <li>Snakk hele tiden — "din!", "min!", "dekk!"</li>
+        <li>Hold disiplinen — motstå fristelsen til å rykke for langt frem</li>
+        <li>Spill rolig under press — resirkuler ballen</li>
+        <li>Vinn annenballer — vær aggressiv i luftdueller</li>
+      </ul>
+    </div>
+
+    <!-- LM -->
+    <div class="role-card" id="role-lm">
+      <h3>Venstre Midtbane</h3>
+      <span class="position-badge badge-mid">LWB · #11</span>
+      <p>Motoren på venstre side. Denne spilleren må være utrettelig — angriper når vi har ballen, løper tilbake hardt når vi ikke har den. En av de hardest arbeidende rollene på banen.</p>
+      <ul class="duties">
+        <li>Kom raskt fremover for å støtte venstre spiss i angrep</li>
+        <li>Lever innlegg og gjennombruddspasninger fra bredeposisjoner</li>
+        <li>Løp tilbake og forsvar når motstanderne angriper på din side</li>
+        <li>Press motstanderens høyre forsvarer for å tvinge feil</li>
+        <li>Hold deg bred for å strekke motstanderne — gi oss bredde</li>
+        <li>Jobb i "vippebalanse" med høyre midtbane — hvis én går frem, holder den andre tilbake</li>
+      </ul>
+    </div>
+
+    <!-- CDM -->
+    <div class="role-card" id="role-cdm">
+      <h3>Sentral Midtbane (CDM-rolle)</h3>
+      <span class="position-badge badge-cdm">CDM · #4 eller #8</span>
+      <p>Midtbanens defensive anker. Denne spilleren står litt dypere enn makker, beskytter de to stopperne og bryter opp motstandernes angrep før de blir farlige. Tenk på dem som lagets skjold — de gjør det skitne arbeidet som gjør alt annet mulig.</p>
+      <ul class="duties">
+        <li><strong>Forsvar først:</strong> Dropp mellom stopperne når motstanderne angriper — bli en tredje forsvarer</li>
+        <li>Avskjær pasninger, vinn løse baller og bryt opp angrep sentralt</li>
+        <li>Skygge og følge motstanderens farligste sentrale midtbane gjennom hele kampen</li>
+        <li>Når du vinner ballen, resirkuler den raskt og enkelt — ikke ta risiko</li>
+        <li><strong>Angrepsbidrag:</strong> Spill korte pasninger til beina for å starte angrep — vær det trygge alternativet</li>
+        <li>Kom av og til sent inn i boksen fra dypet — men bare når CAM-makker holder form</li>
+        <li>Bytt ballen raskt til breddemidtbanene for å strekke spillet</li>
+      </ul>
+    </div>
+
+    <!-- CAM -->
+    <div class="role-card" id="role-cam">
+      <h3>Sentral Midtbane (CAM-rolle)</h3>
+      <span class="position-badge badge-cam">CAM · #4 eller #8</span>
+      <p>Lagets kreative hjerte. Denne spilleren trykker høyere enn CDM-makker og finner rom mellom motstanderens midtbane og forsvar — den farligste sonen på banen. De kobler midtbanen til spissene og ankommer sent for å score eller gi målgivende. Lur, teknisk skarp og modig på ballen.</p>
+      <ul class="duties">
+        <li><strong>Angrep først:</strong> Finn og okkuper rommet mellom motstanderens forsvar og midtbane</li>
+        <li>Ta imot ballen skråstilt og dra fremover — skap overtall</li>
+        <li>Spill gjennombruddspasninger og kombinasjoner med de to spissene</li>
+        <li>Kom sent inn i boksen — time løpet slik at du ankommer når ballen ankommer</li>
+        <li>Skyt fra distanse når muligheten byr seg — vær modig</li>
+        <li><strong>Forsvarsbidrag:</strong> Press motstanderens dypeste midtbane hardt når vi mister ballen</li>
+        <li>Løp raskt tilbake — CDM-makker kan ikke dekke alt alene</li>
+      </ul>
+    </div>
+
+    <!-- RM -->
+    <div class="role-card" id="role-rm">
+      <h3>Høyre Midtbane</h3>
+      <span class="position-badge badge-mid">RWB · #7</span>
+      <p>Speilbildet av venstre midtbane — eksplosiv, hardtarbeidende og toveis. Farlig fremover, disiplinert tilbake. Denne spilleren dekker enorme avstander i hver kamp.</p>
+      <ul class="duties">
+        <li>Støtt høyre spiss med løp og innlegg fra bred posisjon</li>
+        <li>Løp hardt tilbake når motstanderne angriper på din side</li>
+        <li>Press motstanderens venstre forsvarer aggressivt</li>
+        <li>Gi bredde — hold deg langs sidelinjen i ballbesittelse for å strekke spillet</li>
+        <li>Lever gode baller inn i boksen fra høyre flanke</li>
+        <li>Balanser med venstre midtbane — én holder igjen når én angriper</li>
+      </ul>
+    </div>
+
+    <!-- LF -->
+    <div class="role-card" id="role-lf">
+      <h3>Venstre Spiss</h3>
+      <span class="position-badge badge-fwd">LCA · #9</span>
+      <p>En av to i spissduoen. Jobber tett med høyre spiss for å skape mål, gjøre intelligente løp og lede presset fremover. De to spissene må jobbe som én enhet.</p>
+      <ul class="duties">
+        <li>Løp i dybden bak forsvaret for å skape rom</li>
+        <li>Kombiner med høyre spiss — vegg og tilbake, overlappende løp</li>
+        <li>Led presset — vær den første til å presse motstanderens forsvarere</li>
+        <li>Avslutt sjanser rolig — vær modig i boksen</li>
+        <li>Hold ballen når det trengs — trekk med lagkamerater i spillet</li>
+        <li>Hvis høyre spiss drifter bredt, beveg du deg sentralt, og omvendt</li>
+      </ul>
+    </div>
+
+    <!-- RF -->
+    <div class="role-card" id="role-rf">
+      <h3>Høyre Spiss</h3>
+      <span class="position-badge badge-fwd">RCA · #10</span>
+      <p>Spisspartneren på høyre side. Må ha en god forståelse med venstre spiss — sammen er de lagets målfare. Lure bevegelser er viktigere enn fart alene.</p>
+      <ul class="duties">
+        <li>Gjør intelligente løp — i dybden, på tvers, eller til beina</li>
+        <li>Jobb i partnerskap med venstre spiss til enhver tid</li>
+        <li>Press motstanderens stoppere fremover</li>
+        <li>Kom tidlig inn i boksen når breddemidtbaner angriper</li>
+        <li>Avslutt — vær rolig og modig foran mål</li>
+        <li>Hold spillet i gang og koble med midtbanespillere som ankommer fra dypet</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  let activePlayer = null;
+
+  function showRole(role, el) {
+    // hide all cards
+    document.querySelectorAll('.role-card').forEach(c => c.classList.remove('visible'));
+    document.querySelectorAll('.player').forEach(p => p.classList.remove('active'));
+    document.getElementById('defaultMsg').style.display = 'none';
+
+    // show selected
+    const card = document.getElementById('role-' + role);
+    if (card) card.classList.add('visible');
+    el.classList.add('active');
+
+    // on mobile, scroll panel into view
+    if (window.innerWidth < 680) {
+      document.querySelector('.panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+</script>
+</body>
+</html>
