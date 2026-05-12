@@ -256,6 +256,20 @@
 
   .duties li strong { color: var(--yellow); font-weight: 600; }
 
+  .duty-heading {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-top: 0.8rem;
+    margin-bottom: 0.2rem;
+    padding-bottom: 0.2rem;
+    border-bottom: 1px solid rgba(240,192,64,0.25);
+    display: block;
+  }
+
   .hint {
     text-align: center;
     font-size: 0.78rem;
@@ -439,13 +453,19 @@
     <div class="role-card" id="role-gk">
       <h3>Keeper</h3>
       <span class="position-badge badge-gk">K</span>
-      <p>Den siste forsvarsskansen og lagets første angriper. En god målvakt organiserer alle foran seg og starter angrep med smart pasningsspill.</p>
+      <p>Den siste forsvarsskansen og lagets første angriper. En god keeper organiserer alle foran seg og starter angrep med smart pasningsspill.</p>
+      <span class="duty-heading">Forsvar</span>
       <ul class="duties">
         <li>Redde skudd — plassering, fotarbeid og mot</li>
-        <li>Ta innlegg trygt — ropt "keeper!" høyt</li>
-        <li>Fordel raskt for å starte angrep — kast eller spark til den fri forsvareren</li>
-        <li>Organiser de to forsvarerne — konstant kommunikasjon</li>
+        <li>Ta innlegg trygt — rop "keeper!" høyt</li>
+        <li>Organiser de to stopperne — konstant kommunikasjon</li>
         <li>Ikke vær redd for å være offensiv og sweepe bak forsvaret når muligheten byr seg</li>
+      </ul>
+      <span class="duty-heading">Angrep</span>
+      <ul class="duties">
+        <li>Fordel raskt for å starte angrep — kast eller spark til den frie forsvareren</li>
+        <li>Se fremover med én gang — finn den best plasserte spilleren</li>
+        <li>Vær et pasningsalternativ for stopperne under press</li>
       </ul>
     </div>
 
@@ -454,13 +474,19 @@
       <h3>Venstre Stopper</h3>
       <span class="position-badge badge-def">CB</span>
       <p>En av to forsvarspilarer. Jobber som par med høyre stopper for å beskytte målet og vinne ballen tilbake på en ryddig måte.</p>
+      <span class="duty-heading">Forsvar</span>
       <ul class="duties">
         <li>Mark og vinn dueller mot motstanderens spisser</li>
-        <li>Hold en kompakt, smal posisjon — ikke gå for langt ut</li>
-        <li>Kommuniser konstant med stoppermakker</li>
+        <li>Hold en kompakt posisjon — ikke gå for langt ut</li>
+        <li>Kommuniser konstant med stoppermakker — "din!", "min!", "dekk!"</li>
         <li>Når makker rykker frem, dekk du bakover</li>
-        <li>Start angrep — spill kort til midtbanen eller bytt side</li>
         <li>Gå aldri begge mot ballen samtidig</li>
+      </ul>
+      <span class="duty-heading">Angrep</span>
+      <ul class="duties">
+        <li>Start angrep rolig — spill kort til midtbanen eller bytt side</li>
+        <li>Vær alltid tilgjengelig for keeper som pasningsalternativ</li>
+        <li>Dra bredt for å gi laget bredde i oppbygningen</li>
       </ul>
     </div>
 
@@ -469,13 +495,19 @@
       <h3>Høyre Stopper</h3>
       <span class="position-badge badge-def">CB</span>
       <p>Speilbildet av venstre stopper. Sammen danner de et solid tomannsforsvar som må tenke som én enhet.</p>
+      <span class="duty-heading">Forsvar</span>
       <ul class="duties">
         <li>Mark og utfordre motstanderens spisser — hold deg mellom spiss og mål</li>
         <li>Dekk makker når han rykker frem for å presse</li>
         <li>Snakk hele tiden — "din!", "min!", "dekk!"</li>
         <li>Hold disiplinen — motstå fristelsen til å rykke for langt frem</li>
-        <li>Spill rolig under press — resirkuler ballen</li>
         <li>Vinn annenballer — vær aggressiv i luftdueller</li>
+      </ul>
+      <span class="duty-heading">Angrep</span>
+      <ul class="duties">
+        <li>Spill rolig under press — resirkuler ballen fremfor å ta risiko</li>
+        <li>Bytt spillet til den frie wingbacken når motstanderne presser</li>
+        <li>Vær alltid tilgjengelig for keeper som pasningsalternativ</li>
       </ul>
     </div>
 
@@ -484,13 +516,18 @@
       <h3>Venstre Wingback</h3>
       <span class="position-badge badge-mid">LWB</span>
       <p>Motoren på venstre side. Denne spilleren må være utrettelig — angriper når vi har ballen, løper tilbake hardt når vi ikke har den. En av de hardest arbeidende rollene på banen.</p>
+      <span class="duty-heading">Angrep</span>
       <ul class="duties">
-        <li>Kom raskt fremover for å støtte venstre spiss i angrep</li>
-        <li>Lever innlegg og gjennombruddspasninger fra bredeposisjoner</li>
-        <li>Løp tilbake og forsvar når motstanderne angriper på din side</li>
-        <li>Press motstanderens høyre forsvarer for å tvinge feil</li>
-        <li>Hold deg bred for å strekke motstanderne — gi oss bredde</li>
+        <li>Kom raskt fremover for å støtte venstre spiss</li>
+        <li>Hold deg bred langs sidelinjen — gi laget bredde og strekk motstanderne</li>
+        <li>Lever innlegg og gjennombruddspasninger fra flankepposisjoner</li>
         <li>Jobb i "vippebalanse" med høyre wingback — hvis én går frem, holder den andre tilbake</li>
+      </ul>
+      <span class="duty-heading">Forsvar</span>
+      <ul class="duties">
+        <li>Løp tilbake hardt og raskt når vi mister ballen</li>
+        <li>Press motstanderens høyre forsvarer for å tvinge feil</li>
+        <li>Dekk rommet bak deg — ikke bli for høy oppe når motstanderne angriper</li>
       </ul>
     </div>
 
@@ -499,14 +536,18 @@
       <h3>Sentral Midtbane (CDM-rolle)</h3>
       <span class="position-badge badge-cdm">CDM</span>
       <p>Midtbanens defensive anker. Denne spilleren står litt dypere enn makker, beskytter de to stopperne og bryter opp motstandernes angrep før de blir farlige. Tenk på dem som lagets skjold — de gjør det skitne arbeidet som gjør alt annet mulig.</p>
+      <span class="duty-heading">Forsvar først</span>
       <ul class="duties">
-        <li><strong>Forsvar først:</strong> Dropp mellom stopperne når motstanderne angriper — bli en tredje forsvarer</li>
+        <li>Dropp mellom stopperne når motstanderne angriper — bli en tredje forsvarer</li>
         <li>Avskjær pasninger, vinn løse baller og bryt opp angrep sentralt</li>
         <li>Skygge og følge motstanderens farligste sentrale midtbane gjennom hele kampen</li>
         <li>Når du vinner ballen, resirkuler den raskt og enkelt — ikke ta risiko</li>
-        <li><strong>Angrepsbidrag:</strong> Spill korte pasninger til beina for å starte angrep — vær det trygge alternativet</li>
+      </ul>
+      <span class="duty-heading">Angrepsbidrag</span>
+      <ul class="duties">
+        <li>Spill korte pasninger til beina for å starte angrep — vær det trygge alternativet</li>
         <li>Kom av og til sent inn i boksen fra dypet — men bare når CAM-makker holder form</li>
-        <li>Bytt ballen raskt til breddemidtbanene for å strekke spillet</li>
+        <li>Bytt ballen raskt til wingbackene for å strekke spillet</li>
       </ul>
     </div>
 
@@ -515,13 +556,17 @@
       <h3>Sentral Midtbane (CAM-rolle)</h3>
       <span class="position-badge badge-cam">CAM</span>
       <p>Lagets kreative hjerte. Denne spilleren går høyere enn CDM-makker og finner rom mellom motstanderens midtbane og forsvar — den farligste sonen på banen. De kobler midtbanen til spissene og ankommer sent for å score eller gi målgivende. Lur, teknisk skarp og modig på ballen.</p>
+      <span class="duty-heading">Angrep først</span>
       <ul class="duties">
-        <li><strong>Angrep først:</strong> Finn og okkuper rommet mellom motstanderens forsvar og midtbane</li>
+        <li>Finn og okkuper rommet mellom motstanderens forsvar og midtbane</li>
         <li>Ta imot ballen skråstilt og dra fremover — skap overtall</li>
         <li>Spill gjennombruddspasninger og kombinasjoner med de to spissene</li>
         <li>Kom sent inn i boksen — time løpet slik at du ankommer når ballen ankommer</li>
         <li>Skyt fra distanse når muligheten byr seg — vær modig</li>
-        <li><strong>Forsvarsbidrag:</strong> Press motstanderens dypeste midtbane hardt når vi mister ballen</li>
+      </ul>
+      <span class="duty-heading">Forsvarsbidrag</span>
+      <ul class="duties">
+        <li>Press motstanderens dypeste midtbane hardt når vi mister ballen</li>
         <li>Løp raskt tilbake — CDM-makker kan ikke dekke alt alene</li>
       </ul>
     </div>
@@ -531,13 +576,18 @@
       <h3>Høyre Wingback</h3>
       <span class="position-badge badge-mid">RWB</span>
       <p>Speilbildet av venstre wingback — eksplosiv, hardtarbeidende og toveis. Farlig fremover, disiplinert tilbake. Denne spilleren dekker enorme avstander i hver kamp.</p>
+      <span class="duty-heading">Angrep</span>
       <ul class="duties">
         <li>Støtt høyre spiss med løp og innlegg fra bred posisjon</li>
-        <li>Løp hardt tilbake når motstanderne angriper på din side</li>
-        <li>Press motstanderens venstre forsvarer aggressivt</li>
-        <li>Gi bredde — hold deg langs sidelinjen i ballbesittelse for å strekke spillet</li>
+        <li>Hold deg langs sidelinjen i ballbesittelse — gi bredde og strekk spillet</li>
         <li>Lever gode baller inn i boksen fra høyre flanke</li>
         <li>Balanser med venstre wingback — én holder igjen når én angriper</li>
+      </ul>
+      <span class="duty-heading">Forsvar</span>
+      <ul class="duties">
+        <li>Løp hardt tilbake når motstanderne angriper på din side</li>
+        <li>Press motstanderens venstre forsvarer aggressivt</li>
+        <li>Dekk rommet bak deg — ikke bli for høy oppe når motstanderne kontrerer</li>
       </ul>
     </div>
 
@@ -546,13 +596,19 @@
       <h3>Venstre Spiss</h3>
       <span class="position-badge badge-fwd">LF</span>
       <p>En av to i spissduoen. Jobber tett med høyre spiss for å skape mål, gjøre intelligente løp og lede presset fremover. De to spissene må jobbe som én enhet.</p>
+      <span class="duty-heading">Angrep</span>
       <ul class="duties">
         <li>Løp i dybden bak forsvaret for å skape rom</li>
         <li>Kombiner med høyre spiss — vegg og tilbake, overlappende løp</li>
-        <li>Led presset — vær den første til å presse motstanderens forsvarere</li>
         <li>Avslutt sjanser rolig — vær modig i boksen</li>
         <li>Hold ballen når det trengs — trekk med lagkamerater i spillet</li>
         <li>Hvis høyre spiss drifter bredt, beveg du deg sentralt, og omvendt</li>
+      </ul>
+      <span class="duty-heading">Forsvar</span>
+      <ul class="duties">
+        <li>Led presset — vær den første til å presse motstanderens forsvarere</li>
+        <li>Jobb med høyre spiss om å stenge pasningsveier sentralt</li>
+        <li>Løp tilbake til midtbanelinjen når motstanderne har ballen lenge</li>
       </ul>
     </div>
 
@@ -561,13 +617,19 @@
       <h3>Høyre Spiss</h3>
       <span class="position-badge badge-fwd">RF</span>
       <p>Spisspartneren på høyre side. Må ha en god forståelse med venstre spiss — sammen er de lagets målfare. Lure bevegelser er viktigere enn fart alene.</p>
+      <span class="duty-heading">Angrep</span>
       <ul class="duties">
         <li>Gjør intelligente løp — i dybden, på tvers, eller til beina</li>
         <li>Jobb i partnerskap med venstre spiss til enhver tid</li>
-        <li>Press motstanderens stoppere fremover</li>
-        <li>Kom tidlig inn i boksen når breddemidtbaner angriper</li>
+        <li>Kom tidlig inn i boksen når wingbackene angriper</li>
         <li>Avslutt — vær rolig og modig foran mål</li>
         <li>Hold spillet i gang og koble med midtbanespillere som ankommer fra dypet</li>
+      </ul>
+      <span class="duty-heading">Forsvar</span>
+      <ul class="duties">
+        <li>Press motstanderens stoppere fremover — start presset fra front</li>
+        <li>Jobb med venstre spiss om å stenge pasningsveier sentralt</li>
+        <li>Løp tilbake til midtbanelinjen når motstanderne har ballen lenge</li>
       </ul>
     </div>
   </div>
